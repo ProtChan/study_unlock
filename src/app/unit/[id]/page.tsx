@@ -23,7 +23,8 @@ export default function ActiveUnitPage() {
   const next = useMemo(()=>recommendedUnit(data.units),[data.units]);
 
   if (!unit) return <div className="page"><div className="empty-card">Unit not found.</div></div>;
-  const unitId = unit.id;\n  if (unit.status === "completed" && !finished) return <div className="page focus-page"><div className="completed-panel"><Check size={42}/><div className="eyebrow">COMPLETED</div><h1>{unit.title}</h1><p>This Unit is already complete.</p><button className="primary big" onClick={()=>router.push("/today")}>Back to Today</button></div></div>;
+  const unitId = unit.id;
+  if (unit.status === "completed" && !finished) return <div className="page focus-page"><div className="completed-panel"><Check size={42}/><div className="eyebrow">COMPLETED</div><h1>{unit.title}</h1><p>This Unit is already complete.</p><button className="primary big" onClick={()=>router.push("/today")}>Back to Today</button></div></div>;
 
   function doComplete(){ completeUnit(unitId); setFinished(true); }
   function doPause(){ pauseUnit(unitId); router.push("/today"); }
