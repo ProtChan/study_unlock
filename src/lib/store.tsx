@@ -6,7 +6,7 @@ import { balanceForReward, balanceForType, csvEscape, durationMinutes, localDate
 
 const STORAGE_KEY = "study_unlock_data_v1";
 const nowIso = () => new Date().toISOString();
-const id = () => (globalThis.crypto?.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+const id = () => crypto.randomUUID();
 
 export const defaultRewards: RewardDefinition[] = [
   { id: "free-15", name: "Free Time", type: "free_time", amount: 15, unit: "minutes" },
