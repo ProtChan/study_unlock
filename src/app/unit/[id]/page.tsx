@@ -23,18 +23,18 @@ export default function ActiveUnitPage() {
   const next = useMemo(()=>recommendedUnit(data.units),[data.units]);
 
   if (!unit) return <div className="page"><div className="empty-card">Unit not found.</div></div>;
-  if (unit.status === "completed" && !finished) return <div className="page focus-page"><div className="completed-panel"><Check size={42}/><div className="eyebrow">COMPLETED</div><h1>{unit.title}</h1><p>This Unit is already complete.</p><button className="primary big" onClick={()=>router.push("/today")}>Back to Today</button></div></div>;
+  const unitId = unit.id;\n  if (unit.status === "completed" && !finished) return <div className="page focus-page"><div className="completed-panel"><Check size={42}/><div className="eyebrow">COMPLETED</div><h1>{unit.title}</h1><p>This Unit is already complete.</p><button className="primary big" onClick={()=>router.push("/today")}>Back to Today</button></div></div>;
 
-  function doComplete(){ completeUnit(unit.id); setFinished(true); }
-  function doPause(){ pauseUnit(unit.id); router.push("/today"); }
-  function doSkip(){ skipUnit(unit.id); router.push("/today"); }
+  function doComplete(){ completeUnit(unitId); setFinished(true); }
+  function doPause(){ pauseUnit(unitId); router.push("/today"); }
+  function doSkip(){ skipUnit(unitId); router.push("/today"); }
   function doUse(){ if(reward && useReward(reward.id,reward.amount)) setRewardUsed(true); }
   function startNext(){ const n=recommendedUnit(data.units); if(n){ startUnit(n.id); router.replace(`/unit/${n.id}`); setFinished(false); setRewardUsed(false); } else router.push("/today"); }
 
   if (finished) {
     return <div className="page focus-page"><div className="completed-panel pulse-in">
       <Check size={46}/><div className="eyebrow">COMPLETED.</div><h1>+ {formatReward(reward)}</h1><div className="balance-display"><span>Balance</span><strong>{balance}{reward?.type==="free_time"?" min":reward?.type==="money"?" JPY":""}</strong></div>
-      <div className="completion-actions"><button className="ghost big" onClick={doUse} disabled={rewardUsed}>{rewardUsed ? "Reward used" : "Use Reward"}</button><button className="primary big" onClick={startNext}>{next && next.id!==unit.id ? "Start Next Unit" : "Back to Today"}</button><button className="ghost big" onClick={()=>router.push("/dashboard")}>Done for Now</button></div>
+      <div className="completion-actions"><button className="ghost big" onClick={doUse} disabled={rewardUsed}>{rewardUsed ? "Reward used" : "Use Reward"}</button><button className="primary big" onClick={startNext}>{next && next.id!==unitId ? "Start Next Unit" : "Back to Today"}</button><button className="ghost big" onClick={()=>router.push("/dashboard")}>Done for Now</button></div>
     </div></div>;
   }
 
