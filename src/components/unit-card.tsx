@@ -20,7 +20,7 @@ export function UnitCard({ unit, compact = false }: { unit: StudyUnit; compact?:
     <div className="unit-actions">
       {unit.status === "completed" ? <span className="done-mark"><Check size={20}/></span> : unit.status === "skipped" ? <span className="muted"><MoreHorizontal/></span> : <>
         {unit.status === "todo" && <button className="ghost small" onClick={() => moveUnit(unit.id, shiftDate(1))}>Tomorrow</button>}
-        <Link className="primary small" href={`/unit/${unit.id}`} onClick={() => unit.status === "todo" && startUnit(unit.id)}>{unit.status === "active" ? "Resume" : "Start"}<ArrowRight size={15}/></Link>
+        <Link className="primary small" href={`/unit?id=${encodeURIComponent(unit.id)}`} onClick={() => unit.status === "todo" && startUnit(unit.id)}>{unit.status === "active" ? "Resume" : "Start"}<ArrowRight size={15}/></Link>
       </>}
     </div>
   </article>;

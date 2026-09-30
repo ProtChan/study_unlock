@@ -3,11 +3,13 @@ import "./globals.css";
 import { StudyProvider } from "@/lib/store";
 import { AppShell } from "@/components/app-shell";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "Study Unlock",
   description: "Turn completed study outputs into immediate rewards.",
-  manifest: "/manifest.webmanifest",
-  icons: { icon: "/icon.svg", apple: "/icon.svg" },
+  manifest: `${basePath}/manifest.webmanifest`,
+  icons: { icon: `${basePath}/icon.svg`, apple: `${basePath}/icon.svg` },
   appleWebApp: { capable: true, title: "Study Unlock", statusBarStyle: "black-translucent" },
 };
 

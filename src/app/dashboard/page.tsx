@@ -27,7 +27,7 @@ export default function DashboardPage() {
         <div className="eyebrow">NEXT UNIT</div>
         {next ? <><h2>{next.title}</h2><p>{next.completionCriteria}</p><div className="unit-meta hero-meta"><span><Clock3 size={15}/>{next.estimatedMinutes} min est.</span><span className="reward-chip">+ {formatReward(data.rewards.find((r)=>r.id===next.rewardId))}</span></div></> : <><h2>No Unit queued.</h2><p>Add one in a few seconds. Only title and reward are required.</p></>}
       </div>
-      {next ? <Link href={`/unit/${next.id}`} onClick={() => next.status === "todo" && startUnit(next.id)} className="start-next"><Play fill="currentColor"/> START NEXT UNIT</Link> : <Link href="/templates" className="start-next"><ArrowRight/> USE A TEMPLATE</Link>}
+      {next ? <Link href={`/unit?id=${encodeURIComponent(next.id)}`} onClick={() => next.status === "todo" && startUnit(next.id)} className="start-next"><Play fill="currentColor"/> START NEXT UNIT</Link> : <Link href="/templates" className="start-next"><ArrowRight/> USE A TEMPLATE</Link>}
     </section>
 
     <section className="metric-grid">
